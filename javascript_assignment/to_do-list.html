@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>To-Do List</h2>
+
+<input type="text" id="task">
+<button onclick="addTask()">Add</button>
+
+<ul id="list"></ul>
+
+<script>
+
+let tasks = [];   // Array
+
+function addTask(){
+
+    let task = document.getElementById("task").value;
+
+    if(task==""){
+        alert("Enter Task");
+        return;
+    }
+
+    // Object
+    let obj = {
+        name: task
+    };
+
+    tasks.push(obj);
+
+    displayTask();
+
+    document.getElementById("task").value="";
+}
+
+function displayTask(){
+
+    let output="";
+
+    for(let i=0;i<tasks.length;i++){
+
+        output += "<li>"
+                + tasks[i].name
+                + " <button onclick='deleteTask("+i+")'>Delete</button>"
+                + "</li>";
+    }
+
+    document.getElementById("list").innerHTML=output;
+}
+
+function deleteTask(index){
+
+    tasks.splice(index,1);
+
+    displayTask();
+}
+
+</script>
+
+</body>
+</html>

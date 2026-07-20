@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Quiz Application</h2>
+
+<p id="question"></p>
+
+<div id="options"></div>
+
+<br>
+
+<button onclick="previous()">Previous</button>
+<button onclick="next()">Next</button>
+<button onclick="submitQuiz()">Submit</button>
+
+<p id="result"></p>
+
+<script>
+
+let quiz = [
+{
+    question:"1. HTML stands for?",
+    options:["Hyper Text Markup Language","High Text Machine Language","Home Tool Markup Language","None"],
+    answer:"Hyper Text Markup Language"
+},
+{
+    question:"2. JavaScript is a?",
+    options:["Programming Language","Database","Browser","Operating System"],
+    answer:"Programming Language"
+}
+];
+
+let current = 0;
+let score = 0;
+let userAnswer = [];
+
+showQuestion();
+
+function showQuestion(){
+
+    document.getElementById("question").innerHTML = quiz[current].question;
+
+    let text="";
+
+    for(let i=0;i<4;i++){
+
+        text += "<input type='radio' name='opt' value='"+quiz[current].options[i]+"'>"
+        + quiz[current].options[i] + "<br>";
+    }
+
+    document.getElementById("options").innerHTML=text;
+}
+
+function next(){
+
+    let opt=document.getElementsByName("opt");
+
+    for(let i=0;i<opt.length;i++){
+        if(opt[i].checked){
+            userAnswer[current]=opt[i].value;
+        }
+    }
+
+    if(current<quiz.length-1){
+        current++;
+        showQuestion();
+    }
+}
+
+function previous(){
+
+    if(current>0){
+        current--;
+        showQuestion();
+    }
+}
+
+function submitQuiz(){
+
+    let opt=document.getElementsByName("opt");
+
+    for(let i=0;i<opt.length;i++){
+        if(opt[i].checked){
+            userAnswer[current]=opt[i].value;
+        }
+    }
+
+    score=0;
+
+    let ans="";
+
+    for(let i=0;i<quiz.length;i++){
+
+        if(userAnswer[i]==quiz[i].answer){
+            score++;
+        }
+
+        ans += "<br>Q"+(i+1)+": "+quiz[i].answer;
+    }
+
+    document.getElementById("result").innerHTML=
+    "Score = "+score+"/"+quiz.length+ans;
+}
+
+</script>
+
+</body>
+</html>

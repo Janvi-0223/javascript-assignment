@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Student Grade Calculator</h2>
+
+Name: <input type="text" id="name"><br><br>
+
+Marks 1: <input type="number" id="m1"><br><br>
+Marks 2: <input type="number" id="m2"><br><br>
+Marks 3: <input type="number" id="m3"><br><br>
+Marks 4: <input type="number" id="m4"><br><br>
+Marks 5: <input type="number" id="m5"><br><br>
+
+<button onclick="result()">Calculate</button>
+
+<p id="demo"></p>
+
+<script>
+
+function result(){
+
+    let name = document.getElementById("name").value;
+
+    // Array
+    let marks = [
+        Number(document.getElementById("m1").value),
+        Number(document.getElementById("m2").value),
+        Number(document.getElementById("m3").value),
+        Number(document.getElementById("m4").value),
+        Number(document.getElementById("m5").value)
+    ];
+
+    let total = 0;
+
+    for(let i=0; i<marks.length; i++){
+
+        if(marks[i] < 0 || marks[i] > 100){
+            alert("Enter marks between 0 and 100");
+            return;
+        }
+
+        total = total + marks[i];
+    }
+
+    let percentage = total/5;
+    let grade;
+
+    if(percentage>=90)
+        grade="A";
+    else if(percentage>=75)
+        grade="B";
+    else if(percentage>=60)
+        grade="C";
+    else if(percentage>=40)
+        grade="D";
+    else
+        grade="Fail";
+
+    document.getElementById("demo").innerHTML=
+    "<table border='1'>"+
+    "<tr><th>Name</th><th>Total</th><th>Percentage</th><th>Grade</th></tr>"+
+    "<tr><td>"+name+"</td><td>"+total+"</td><td>"+percentage+"%</td><td>"+grade+"</td></tr>"+
+    "</table>";
+
+}
+
+</script>
+
+</body>
+</html>
